@@ -23,12 +23,24 @@ func main() {
 		To:     entities.Coin(input.To),
 	}
 
+	var convertor convert.Convertor
 	coinApi := coinmarketcap.New()
-	convertor := convert.New(coinApi)
+	convertor = convert.New(coinApi)
 
 	result, err := convertor.Convert(toConvert)
 	if err != nil {
 		log.Printf("cant convert: %v", err)
+		os.Exit(1)
+	}
+
+	clioutput.PrintResult(result)
+
+	commission := entities.Commission(5)
+	convertorWithCommission := convert.NewWithCommision(convertor, commission)
+
+	result, err = convertorWithCommission.Convert(toConvert)
+	if err != nil {
+		log.Printf("cant convert with commision: %v", err)
 		os.Exit(1)
 	}
 

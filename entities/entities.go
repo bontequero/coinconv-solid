@@ -11,3 +11,5 @@ type ConversionResult struct {
 }
 
 type Coin string
+
+type Commission float64

@@ -19,3 +19,5 @@ func New(c PriceConvertor) priceConvertor {
 func (c priceConvertor) Convert(cd entities.ConversionData) (entities.ConversionResult, error) {
 	return c.ConvertPrice(cd)
 }
+
+var _ Convertor = (*priceConvertor)(nil)
